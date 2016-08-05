@@ -1,0 +1,1 @@
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe ".\PowerManagerCOM\bin\Debug\PowerManagerCom.dll" /tlb /codebase
