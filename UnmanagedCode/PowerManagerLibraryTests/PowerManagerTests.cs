@@ -14,7 +14,7 @@ namespace PowerManagerLibraryTests
 		{
 			var lastSleepTime = _powerManager.GetLastSleepTime();
 
-			Console.WriteLine("Last sleep time: {0}", lastSleepTime.ToLocalTime());
+			Console.WriteLine("Last sleep time: {0}", lastSleepTime);
 		}
 
 		[TestMethod]
@@ -22,7 +22,7 @@ namespace PowerManagerLibraryTests
 		{
 			var lastWakeTime = _powerManager.GetLastWakeTime();
 
-			Console.WriteLine("Last wake time: {0}", lastWakeTime.ToLocalTime());
+			Console.WriteLine("Last wake time: {0}", lastWakeTime);
 		}
 
 		[TestMethod]
@@ -46,17 +46,13 @@ namespace PowerManagerLibraryTests
 		[TestMethod]
 		public void ReserveHibernationFileTest()
 		{
-			var result = _powerManager.ReserveHibernationFile();
-
-			Assert.IsTrue(result);
+			_powerManager.ReserveHibernationFile();
 		}
 
 		[TestMethod]
 		public void RemovetHibernationFileTest()
 		{
-			var result = _powerManager.RemoveHibernationFile();
-
-			Assert.IsTrue(result);
+			_powerManager.RemoveHibernationFile();
 		}
 
 		[TestMethod]

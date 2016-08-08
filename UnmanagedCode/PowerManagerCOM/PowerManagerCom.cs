@@ -25,5 +25,15 @@ namespace PowerManagerCOM
 		{
 			return _powerManager.GetLastWakeTime();
 		}
+
+		public bool GetSystemBatteryState()
+		{
+			return _powerManager.GetSystemBatteryState().BatteryPresent;
+		}
+
+		public int GetSystemCoolingMode()
+		{
+			return _powerManager.GetSystemPowerInformation().CoolingMode;
+		}
 	}
 }

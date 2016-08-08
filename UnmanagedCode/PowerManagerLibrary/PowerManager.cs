@@ -25,14 +25,14 @@ namespace PowerManagerLibrary
 			return GetSystemInformation<SystemPowerInformation>(PowerInformationLevel.SystemPowerInformation);
 		}
 
-		public bool ReserveHibernationFile()
+		public void ReserveHibernationFile()
 		{
-			return ManageHibernationFile(true);
+			ManageHibernationFile(true);
 		}
 
-		public bool RemoveHibernationFile()
+		public void RemoveHibernationFile()
 		{
-			return ManageHibernationFile(false);
+			ManageHibernationFile(false);
 		}
 
 		public void SuspendSystem()
@@ -67,7 +67,8 @@ namespace PowerManagerLibrary
 			Marshal.FreeHGlobal(outputBuffer);
 			var systemStartupTime = GetTickCount64() * 1000000 / 100;
 
-			return DateTime.UtcNow - TimeSpan.FromTicks((long)systemStartupTime) + TimeSpan.FromTicks(ticksCount);
+			var date = DateTime.UtcNow - TimeSpan.FromTicks((long)systemStartupTime) + TimeSpan.FromTicks(ticksCount);
+			return date.ToLocalTime();
 		}
 
 		private T GetSystemInformation<T>(PowerInformationLevel level)
@@ -83,17 +84,15 @@ namespace PowerManagerLibrary
 			return powerInformation;
 		}
 
-		private bool ManageHibernationFile(bool reserve)
+		private void ManageHibernationFile(bool reserve)
 		{
 			int inputBufferSize = Marshal.SizeOf(typeof(int));
 			IntPtr inputBuffer = Marshal.AllocHGlobal(inputBufferSize);
 
 			Marshal.WriteInt32(inputBuffer, 0, reserve ? 1 : 0);
-			var status = CallNtPowerInformation((int)PowerInformationLevel.SystemReserveHiberFile, inputBuffer, (uint)inputBufferSize, IntPtr.Zero, 0);
+			CallNtPowerInformation((int)PowerInformationLevel.SystemReserveHiberFile, inputBuffer, (uint)inputBufferSize, IntPtr.Zero, 0);
 
 			Marshal.FreeHGlobal(inputBuffer);
-
-			return status == 0;
 		}
 	}
 }

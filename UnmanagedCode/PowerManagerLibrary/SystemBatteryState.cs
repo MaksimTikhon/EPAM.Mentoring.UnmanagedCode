@@ -3,6 +3,7 @@
 namespace PowerManagerLibrary
 {
 	[StructLayout(LayoutKind.Sequential)]
+	[ComVisible(true)]
 	public struct SystemBatteryState
 	{
 		public bool AcOnLine;

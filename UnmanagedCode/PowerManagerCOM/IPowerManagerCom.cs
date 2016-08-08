@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using PowerManagerLibrary;
 
 namespace PowerManagerCOM
 {
@@ -11,5 +12,9 @@ namespace PowerManagerCOM
 		DateTime GetLastSleepTime();
 
 		DateTime GetLastWakeTime();
+
+		bool GetSystemBatteryState();
+
+		int GetSystemCoolingMode();
 	}
 }
